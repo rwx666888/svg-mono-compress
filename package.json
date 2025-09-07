@@ -3,9 +3,13 @@
   "displayName": "SVG压缩工具",
   "description": "VSCode插件：压缩SVG文件和转换为单色SVG",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "publisher": "rwx666888",
   "engines": {
     "vscode": "^1.74.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/rwx666888/svg-mono-compress.git"
   },
   "categories": ["Other"],
   "keywords": ["svg", "compress", "optimize", "mono"],
@@ -42,7 +46,9 @@
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "devDependencies": {
     "@types/vscode": "^1.74.0",

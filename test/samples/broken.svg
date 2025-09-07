@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-  <!-- 损坏的SVG文件，用于测试错误处理 -->
-  <circle cx="50" cy="50" r="30" fill="#ff0000"
-  <!-- 缺少闭合标签 -->
-  <rect x="20" y="20" width="60" height="60" fill="blue" stroke="green" stroke-width="invalid-value"/>
-  <path d="M10,10 L90,90 Z" fill="#00ff00"/>
-  <!-- 无效的属性值 -->
-  <ellipse cx="abc" cy="def" rx="20" ry="15" fill="yellow"/>
-<!-- 缺少svg闭合标签

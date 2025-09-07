@@ -66,23 +66,9 @@ class SvgProcessor {
     async convertToMono(filePaths) {
         const paths = Array.isArray(filePaths) ? filePaths : [filePaths];
         const svgPaths = this.filterSvgFiles(paths);
-        // 在官方默认配置基础上额外去除颜色
-        const baseConfig = await (0, svgo_1.loadConfig)() || {};
-        const monoConfig = {
-            ...baseConfig,
-            plugins: [
-                ...(baseConfig.plugins || []),
-                {
-                    name: 'removeAttrs',
-                    params: {
-                        attrs: ['fill', 'stroke']
-                    }
-                }
-            ]
-        };
         const results = [];
         for (const filePath of svgPaths) {
-            const result = await this.processSingleFile(filePath, monoConfig);
+            const result = await this.processMonoFile(filePath);
             results.push(result);
         }
         return this.calculateProcessResult(results);
@@ -92,6 +78,77 @@ class SvgProcessor {
      */
     filterSvgFiles(filePaths) {
         return filePaths.filter(path => path.toLowerCase().endsWith('.svg'));
+    }
+    /**
+     * 处理单色SVG文件
+     * 先执行默认压缩，然后将颜色属性替换为currentColor
+     */
+    async processMonoFile(filePath) {
+        try {
+            // 读取文件
+            const content = await fs.promises.readFile(filePath, 'utf-8');
+            const originalSize = Buffer.byteLength(content, 'utf-8');
+            // 第一步：使用默认配置压缩
+            const baseConfig = await (0, svgo_1.loadConfig)() || {};
+            const compressResult = (0, svgo_1.optimize)(content, baseConfig);
+            if (!('data' in compressResult)) {
+                throw new Error('SVGO压缩失败');
+            }
+            // 第二步：将颜色属性替换为currentColor
+            const monoConfig = {
+                plugins: [
+                    {
+                        name: 'replaceColorWithCurrentColor',
+                        fn: () => {
+                            return {
+                                element: {
+                                    enter: (node) => {
+                                        if (node.attributes) {
+                                            // 替换fill属性
+                                            if (node.attributes.fill && node.attributes.fill !== 'none' && node.attributes.fill !== 'currentColor') {
+                                                node.attributes.fill = 'currentColor';
+                                            }
+                                            // 替换stroke属性
+                                            if (node.attributes.stroke && node.attributes.stroke !== 'none' && node.attributes.stroke !== 'currentColor') {
+                                                node.attributes.stroke = 'currentColor';
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+                        }
+                    }
+                ]
+            };
+            // 应用单色转换
+            const monoResult = (0, svgo_1.optimize)(compressResult.data, monoConfig);
+            if ('data' in monoResult) {
+                // 写入最终结果
+                await fs.promises.writeFile(filePath, monoResult.data, 'utf-8');
+                const compressedSize = Buffer.byteLength(monoResult.data, 'utf-8');
+                const compressionRatio = originalSize > 0 ? (originalSize - compressedSize) / originalSize : 0;
+                return {
+                    success: true,
+                    filePath,
+                    originalSize,
+                    compressedSize,
+                    compressionRatio
+                };
+            }
+            else {
+                throw new Error('单色转换失败');
+            }
+        }
+        catch (error) {
+            return {
+                success: false,
+                filePath,
+                originalSize: 0,
+                compressedSize: 0,
+                compressionRatio: 0,
+                error: error instanceof Error ? error.message : String(error)
+            };
+        }
     }
     /**
      * 处理单个SVG文件
