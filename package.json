@@ -47,7 +47,7 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "package": "vsce package",
+    "package": "vsce package --baseContentUrl https://gitee.com/rwx666888/svg-mono-compress/raw/master",
     "publish": "vsce publish"
   },
   "devDependencies": {
