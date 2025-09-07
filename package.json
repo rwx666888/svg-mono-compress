@@ -14,7 +14,7 @@
   "categories": ["Other"],
   "keywords": ["svg", "compress", "optimize", "mono"],
   "activationEvents": [
-    "onLanguage:xml"
+    "onLanguage:svg"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -48,7 +48,7 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "package": "vsce package --baseContentUrl https://gitee.com/rwx666888/svg-mono-compress/raw/master",
-    "publish": "vsce publish"
+    "publish": "vsce publish --baseContentUrl https://gitee.com/rwx666888/svg-mono-compress/raw/master"
   },
   "devDependencies": {
     "@types/vscode": "^1.74.0",
@@ -58,5 +58,8 @@
   },
   "dependencies": {
     "svgo": "^4.0.0"
-  }
+  },
+  "bundleDependencies": [
+    "svgo"
+  ]
 }
