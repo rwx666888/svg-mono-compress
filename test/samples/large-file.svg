@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <!-- 大文件性能测试 -->
+  <defs>
+    <pattern id="pattern1" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <rect width="50" height="50" fill="#f8f9fa"/>
+      <circle cx="25" cy="25" r="10" fill="#007bff"/>
+    </pattern>
+  </defs>
+  
+  <rect width="1000" height="1000" fill="url(#pattern1)"/>
+  
+  <!-- 生成大量元素 -->
+  <g id="circles">
+    <circle cx="100" cy="100" r="20" fill="#dc3545"/>
+    <circle cx="200" cy="100" r="20" fill="#28a745"/>
+    <circle cx="300" cy="100" r="20" fill="#ffc107"/>
+    <circle cx="400" cy="100" r="20" fill="#17a2b8"/>
+    <circle cx="500" cy="100" r="20" fill="#6f42c1"/>
+    <circle cx="600" cy="100" r="20" fill="#e83e8c"/>
+    <circle cx="700" cy="100" r="20" fill="#fd7e14"/>
+    <circle cx="800" cy="100" r="20" fill="#20c997"/>
+    <circle cx="900" cy="100" r="20" fill="#6c757d"/>
+  </g>
+  
+  <g id="rectangles">
+    <rect x="50" y="200" width="40" height="40" fill="#343a40" transform="rotate(45 70 220)"/>
+    <rect x="150" y="200" width="40" height="40" fill="#495057" transform="rotate(45 170 220)"/>
+    <rect x="250" y="200" width="40" height="40" fill="#6c757d" transform="rotate(45 270 220)"/>
+    <rect x="350" y="200" width="40" height="40" fill="#adb5bd" transform="rotate(45 370 220)"/>
+    <rect x="450" y="200" width="40" height="40" fill="#ced4da" transform="rotate(45 470 220)"/>
+    <rect x="550" y="200" width="40" height="40" fill="#dee2e6" transform="rotate(45 570 220)"/>
+    <rect x="650" y="200" width="40" height="40" fill="#e9ecef" transform="rotate(45 670 220)"/>
+    <rect x="750" y="200" width="40" height="40" fill="#f8f9fa" transform="rotate(45 770 220)"/>
+  </g>
+  
+  <g id="paths">
+    <path d="M100,300 Q200,250 300,300 T500,300" fill="none" stroke="#007bff" stroke-width="5"/>
+    <path d="M100,350 Q200,300 300,350 T500,350" fill="none" stroke="#28a745" stroke-width="5"/>
+    <path d="M100,400 Q200,350 300,400 T500,400" fill="none" stroke="#dc3545" stroke-width="5"/>
+    <path d="M100,450 Q200,400 300,450 T500,450" fill="none" stroke="#ffc107" stroke-width="5"/>
+  </g>
+  
+  <text x="500" y="600" font-family="Arial, sans-serif" font-size="48" fill="#212529" text-anchor="middle">
+    大文件测试
+  </text>
+  
+  <g id="complex-shapes">
+    <polygon points="600,700 650,650 700,700 675,750 625,750" fill="#6f42c1" stroke="#563d7c" stroke-width="3"/>
+    <ellipse cx="750" cy="700" rx="50" ry="30" fill="#e83e8c" stroke="#d63384" stroke-width="3"/>
+    <polyline points="600,800 650,780 700,800 750,780 800,800" fill="none" stroke="#fd7e14" stroke-width="4"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+.vscode/**
+.vscode-test/**
+out/test/**
+src/**
+.gitignore
+tsconfig.json
+**/*.map
+.nyc_output
+coverage
+npm-debug.log
+**/*.ts
+!out/**/*.js
+node_modules
+.trae/**
+test.svg
+README.en.md
+README.md

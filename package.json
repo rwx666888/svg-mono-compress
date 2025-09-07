@@ -1,0 +1,56 @@
+{
+  "name": "svg-mono-compress",
+  "displayName": "SVG压缩工具",
+  "description": "VSCode插件：压缩SVG文件和转换为单色SVG",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["svg", "compress", "optimize", "mono"],
+  "activationEvents": [
+    "onLanguage:xml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "svg-compress.compress",
+        "title": "压缩SVG"
+      },
+      {
+        "command": "svg-compress.monoCompress",
+        "title": "压缩为单色SVG"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "svg-compress.compress",
+          "when": "resourceExtname == .svg",
+          "group": "7_modification@1"
+        },
+        {
+          "command": "svg-compress.monoCompress",
+          "when": "resourceExtname == .svg",
+          "group": "7_modification@2"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "18.x",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "svgo": "^4.0.0"
+  }
+}
