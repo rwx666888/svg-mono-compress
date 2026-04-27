@@ -1,36 +1,82 @@
-# svg-mono-compress
+# SVG Mono Compress - VSCode Extension
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+English | [简体中文](./README.md)
 
-#### Software Architecture
-Software architecture description
+A VSCode extension for SVG compression and monochrome icon conversion (`currentColor`), powered by SVGO.
 
-#### Installation
+## Features
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+- **SVG Compression**: Reduce SVG file size using SVGO
+- **Monochrome Conversion**: Convert SVG files into icon-like monochrome style that follows text color
+- **Batch Processing**: Process multiple SVG files at once
+- **Smart Filtering**: Automatically ignores non-SVG files
+- **Config Support**: Supports project-level `svgo.config.js`
+- **Context Menu**: Available directly in VSCode Explorer right-click menu
 
-#### Instructions
+## Installation
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### Install from VS Code Marketplace
 
-#### Contribution
+1. Open VSCode
+2. Press `Ctrl+Shift+X` to open Extensions
+3. Search for `SVG Mono Compress`
+4. Click Install
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+### Install from VSIX
 
+1. Download the `.vsix` file
+2. Press `Ctrl+Shift+P` in VSCode
+3. Run `Extensions: Install from VSIX`
+4. Select the `.vsix` file
 
-#### Gitee Feature
+## Usage
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+### Basic Usage
+
+1. Right-click an SVG file in Explorer
+2. Choose one of the commands:
+   - **Compress SVG**
+   - **Compress as Monochrome SVG**
+
+### Batch Processing
+
+1. Select multiple SVG files
+2. Right-click and choose a compression command
+3. The extension processes files sequentially and shows summary results
+
+### Custom SVGO Config
+
+Create `svgo.config.js` in your project root:
+
+```js
+module.exports = {
+  plugins: [
+    {
+      name: "preset-default",
+      params: {
+        overrides: {
+          removeViewBox: false,
+        },
+      },
+    },
+  ],
+};
+```
+
+## Notes
+
+- "Compress as Monochrome SVG" is designed for icon-style monochrome output.
+- Complex effects like gradients, patterns, and multi-color layers may be simplified or removed.
+- Best for icon assets, not for illustration-style SVGs that must preserve rich visual details.
+
+## Development and Release
+
+Developer-focused docs are in [development.md](./development.md).
+
+## License
+
+MIT License. See [LICENSE](./LICENSE).
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md).
